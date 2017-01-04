@@ -44,13 +44,10 @@
     
     //创建运动管理者
     self.mgr = [[CMMotionManager alloc] init];
-    
 
     UIButton* btn = [UIButton buttonWithType:UIButtonTypeContactAdd];
     
     btn.center = CGPointMake(self.view.bounds.size.width * 0.5, self.view.bounds.size.height - 100);
-    
-    
     
     [self deviceInput];
     
@@ -82,10 +79,6 @@
     [self.view.layer addSublayer:self.previewLayer];
     
     self.previewLayer.frame = self.view.bounds;
-    
-    
-
-    
     
 }
 
@@ -123,37 +116,28 @@
         return;
     }
     
+    __weak typeof(self) weakself = self;
     
-   
-    
-    
-    if ([self.mgr isGyroAvailable]) {
+    if (weakself.mgr.deviceMotionAvailable) {
         
-        [self.mgr startGyroUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMGyroData * _Nullable gyroData, NSError * _Nullable error) {
+        [weakself.mgr startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue] withHandler:^(CMDeviceMotion *data, NSError *error) {
             
-            CMRotationRate rotationRate = gyroData.rotationRate;
+            CMRotationRate rotationRate = data.rotationRate;
             
-            self.yPoint = rotationRate.y * -2;
-            self.xPoint = rotationRate.x * -2;
-            self.zPoint = rotationRate.z * -2;
+            weakself.yPoint = rotationRate.y * -7;
+            weakself.xPoint = rotationRate.x * -7;
+            weakself.zPoint = rotationRate.z * -7;
             
+            CGRect arImageFrame = weakself.arImageView.frame;
+            arImageFrame.origin.x -= weakself.yPoint;
+            arImageFrame.origin.y -= weakself.xPoint;
             
-            CGRect arImageFrame = _arImageView.frame;
-            arImageFrame.origin.x -= self.yPoint;
-            arImageFrame.origin.y -= self.xPoint;
-//            arImageFrame.origin.z += self.zPoint;
-            
-//            NSLog(@"arImageFrame.origin.x: %f", arImageFrame.origin.x);
-            
-            _arImageView.frame = CGRectMake(arImageFrame.origin.x, arImageFrame.origin.y, arImageFrame.size.width, arImageFrame.size.height);
-            
-            
-//            _arImageView.layer.transform = CATransform3DRotate(_arImageView.layer.transform, 1, rotationRate.x, rotationRate.y, rotationRate.z);
+            weakself.arImageView.frame = CGRectMake(arImageFrame.origin.x, arImageFrame.origin.y, arImageFrame.size.width, arImageFrame.size.height);
             
             
         }];
+        
     }
-    
 }
 
 
@@ -182,7 +166,9 @@
     
 }
 
-
+-(void)dealloc{
+    
+}
 
 
 //  输入设备

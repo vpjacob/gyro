@@ -281,7 +281,7 @@
 				DEVELOPMENT_TEAM = 9UDZ2DU44G;
 				INFOPLIST_FILE = "QRCode OC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.long.QRCode-OC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.long.QRCode-O";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -294,7 +294,7 @@
 				DEVELOPMENT_TEAM = 9UDZ2DU44G;
 				INFOPLIST_FILE = "QRCode OC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.long.QRCode-OC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.long.QRCode-O";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
